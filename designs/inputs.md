@@ -2,7 +2,7 @@
 
 ## Owner
 * Has a secret input they want to store (`I`)
-* Split input into `n` shares where each share is (I~1~, I~2~, ..., I~n~)
+* Split input into `n` shares where each share is (I<sub>1</sub>, I<sub>2</sub>, ..., I<sub>n</sub>)
 * Invokes the smart contract's `storeData` function with the shares and their commitments
 * Each person in a randomly selected quorum now holds a share of the input
 
@@ -16,14 +16,14 @@
 _One quorum should never hold their shares for an extended period of time and thus we initiate a re-sharing protocol to transfer the shares to a new random quorum_
 * Owner invokes the `renewShares` function on the smart contract which starts the selection of a new random quorum
 * The current quorum then collectively generate (in batches) a new polynomial for each of their shares to mask the previous value
-    * i.e. {V + W~k~} for each k in the new quorum
+    * i.e. { 𝑉 + 𝑊<sub>𝑘</sub> } for each k in the new quorum
     * V should be unique for each k
 * This polynomial needs to satisfy the following:
-    * ∀𝑘 𝑈′𝑘(𝑖) = 𝑈(𝑖) + 𝑉(𝑖) + 𝑊𝑘(𝑖)
-    * Where V(0) = 0 and ∀𝑘 𝑊𝑘(k) = k holds
-* Each current member then stores its share for k as {U'~k~(i) = U(i) + V(i) + W~k~(i)} for each k
-    * U(i) being the current shareholder's share
-* Each new member in Q' collects t+1 shares and reconstructs the polynomial to get U'(k)
+    * ∀𝑘 𝑈′<sub>𝑘</sub>(𝑖) = 𝑈(𝑖) + 𝑉(𝑖) + 𝑊<sub>𝑘</sub>(𝑖)
+    * Where 𝑉(0) = 0 and ∀𝑘 𝑊<sub>𝑘</sub>(k) = k holds
+* Each current member then stores its share for k as { 𝑈′<sub>𝑘</sub>(𝑖) = 𝑈(𝑖) + 𝑉𝑖) + 𝑊<sub>𝑘</sub>(𝑖) } for each k
+    * 𝑈(𝑖) being the current shareholder's share
+* Each new member in Q' collects t+1 shares and reconstructs the polynomial to get 𝑈′(𝑘)
 
 #### Obtaining V without interaction
 * Each current shareholder can construct a Pseudo-Random Zero Sharing (PRZS) which supplies a polynomial such that V(0) = 0
